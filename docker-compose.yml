@@ -1,0 +1,18 @@
+db:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=somepassword
+web:
+  build: .
+  ports:
+    - 80:80
+  links:
+    - db
+  volumes:
+    - ./data:/var/www/html
+  environment:
+    - MEDIAWIKI_DB_HOST=db:3306
+    - MEDIAWIKI_DB_USER=root
+    - MEDIAWIKI_DB_PASSWORD=somepassword
+    - MEDIAWIKI_DB_NAME=mediawiki
+
